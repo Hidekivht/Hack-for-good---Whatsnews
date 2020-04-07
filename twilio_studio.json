@@ -1,0 +1,1037 @@
+{
+  "description": "A New Flow",
+  "states": [
+    {
+      "name": "Trigger",
+      "type": "InitialState",
+      "properties": {
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "flow_url": "https://webhooks.twilio.com/v1/Accounts/AC982615a874f3e00b230b27f2f02d0c20/Flows/FW968e518796c6ddc4c4e3881ca2ef3f94"
+      },
+      "transitions": [
+        {
+          "event": "incomingMessage",
+          "conditions": [],
+          "next": "FFc3f62a1c9af61407ff9915b52f7ed310",
+          "uuid": "024025fb-5b97-49bc-82fe-53fe5c419549"
+        },
+        {
+          "event": "incomingCall",
+          "conditions": [],
+          "next": null,
+          "uuid": "169f70c7-cbab-4648-9f0a-f50a169fad82"
+        },
+        {
+          "event": "incomingRequest",
+          "conditions": [],
+          "next": null,
+          "uuid": "acbe7c1f-1fb1-4ca5-a4c3-d3a7e4fdc0ec"
+        }
+      ],
+      "sid": "FFe106cdbf67661808e01bbc863c5387ec"
+    },
+    {
+      "name": "msg_inicial",
+      "type": "MessagePrompt",
+      "properties": {
+        "offset": {
+          "x": -920,
+          "y": 150
+        },
+        "body": "Olá! O que gostaria de saber?\n\n1 - Informações sobre a COVID-19\n2 - Últimas notícias\n3 - Fake news mais relevantes\n4 - Cadastre-se para receber notícias todos os dias\n5 - Cancelar o serviço de notícias\n\nSe você mora em SP, saiba o que o governo decretou na quarentena através do link:  https://www.saopaulo.sp.gov.br/coronavirus/quarentena/",
+        "from": "{{flow.channel.address}}",
+        "timeout": 3600,
+        "save_response_as": null,
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "incomingMessage",
+          "conditions": [],
+          "next": "FF633372ebb19a1dcc6f029dc5ba495007",
+          "uuid": "e458e153-5f92-47a0-9e05-0e88f0abb4e9"
+        },
+        {
+          "event": "timeout",
+          "conditions": [],
+          "next": null,
+          "uuid": "52689702-315b-455b-88b8-1ba1ec672305"
+        },
+        {
+          "event": "deliveryFailure",
+          "conditions": [],
+          "next": null,
+          "uuid": "e56cd4fe-93e4-4bf4-bfbb-1d544b1a4a38"
+        }
+      ],
+      "sid": "FFc3f62a1c9af61407ff9915b52f7ed310"
+    },
+    {
+      "name": "resp",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": -130,
+          "y": 310
+        },
+        "input": "{{widgets.msg_inicial.inbound.Body}}"
+      },
+      "transitions": [
+        {
+          "event": "noMatch",
+          "conditions": [],
+          "next": "FF25fa6b4370d7c327d65cb4229b7f7cc3",
+          "uuid": "2be01803-9628-42c4-895b-14ebae4cc86f"
+        },
+        {
+          "event": "match",
+          "conditions": [
+            {
+              "friendly_name": "If value equal_to 1",
+              "type": "matches_any_of",
+              "arguments": [
+                "{{widgets.msg_inicial.inbound.Body}}"
+              ],
+              "value": "1"
+            }
+          ],
+          "next": "FFc914e0986566f7766ace8c0797254b48",
+          "uuid": "79653040-b6a4-4412-bd18-036a84cec07e"
+        },
+        {
+          "event": "match",
+          "conditions": [
+            {
+              "friendly_name": "If value equal_to 2",
+              "type": "matches_any_of",
+              "arguments": [
+                "{{widgets.msg_inicial.inbound.Body}}"
+              ],
+              "value": "2"
+            }
+          ],
+          "next": "FF80f8377fc7bbdc511c1d3e0c3a5ebf07",
+          "uuid": "4d416f4b-075e-4411-994c-0f38e05e4d76"
+        },
+        {
+          "event": "match",
+          "conditions": [
+            {
+              "friendly_name": "If value matches_any_of ajuda",
+              "type": "matches_any_of",
+              "arguments": [
+                "{{widgets.msg_inicial.inbound.Body}}"
+              ],
+              "value": "ajuda,help"
+            }
+          ],
+          "next": "FF4beb168371a8f1d3002db8c5e7b2c71a",
+          "uuid": "ece34f2b-fb99-473c-a2f6-64666525f2e6"
+        },
+        {
+          "event": "match",
+          "conditions": [
+            {
+              "friendly_name": "If value matches_any_of 3",
+              "type": "matches_any_of",
+              "arguments": [
+                "{{widgets.msg_inicial.inbound.Body}}"
+              ],
+              "value": "3"
+            }
+          ],
+          "next": "FFc5c87729a677e059ce2cf3c04da02e01",
+          "uuid": "3399f7f8-1c36-43a0-a56a-d63061cc1433"
+        },
+        {
+          "event": "match",
+          "conditions": [
+            {
+              "friendly_name": "If value matches_any_of 4",
+              "type": "matches_any_of",
+              "arguments": [
+                "{{widgets.msg_inicial.inbound.Body}}"
+              ],
+              "value": "4"
+            }
+          ],
+          "next": "FFeb592846d79d2f2af7b6f8c0e80128e9",
+          "uuid": "d9b12acc-fa4b-4093-b99b-b7b6c1992434"
+        },
+        {
+          "event": "match",
+          "conditions": [
+            {
+              "friendly_name": "If value matches_any_of 5",
+              "type": "matches_any_of",
+              "arguments": [
+                "{{widgets.msg_inicial.inbound.Body}}"
+              ],
+              "value": "5"
+            }
+          ],
+          "next": "FFa702ce8b1bbc0b991fda02f586fd3fd8",
+          "uuid": "80c696c1-b5a0-4cc4-bc36-8d601bb58645"
+        }
+      ],
+      "sid": "FF7830105c911263d26c984a32c9f6fe6a"
+    },
+    {
+      "name": "resp_0",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": -630,
+          "y": 550
+        },
+        "body": "Não entendi sua resposta :(",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": "FFc3f62a1c9af61407ff9915b52f7ed310",
+          "uuid": "fd6d2961-a69f-4ac4-91bc-adc674e3eed8"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": "FFdd00558dfe1d8df2cdddb48975711ecf",
+          "uuid": "fd029291-0802-4cec-89ec-7e2ede0e822a"
+        }
+      ],
+      "sid": "FF25fa6b4370d7c327d65cb4229b7f7cc3"
+    },
+    {
+      "name": "resp_3",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": 980,
+          "y": 550
+        },
+        "body": "Ajuda",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": null,
+          "uuid": "40ba02c1-0400-48de-962b-ef0e3f86b707"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": "FFdd00558dfe1d8df2cdddb48975711ecf",
+          "uuid": "bf3e1c8f-6c9e-4c4d-b250-b0463be1c1f2"
+        }
+      ],
+      "sid": "FF4beb168371a8f1d3002db8c5e7b2c71a"
+    },
+    {
+      "name": "erro",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": 1000,
+          "y": 830
+        },
+        "body": "Erro!",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": null,
+          "uuid": "d544d925-4d8b-4af9-b3d3-262c997f3b9e"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "4caa23da-0dea-4c0f-aead-557209e4e42b"
+        }
+      ],
+      "sid": "FFdd00558dfe1d8df2cdddb48975711ecf"
+    },
+    {
+      "name": "get_noticias",
+      "type": "Webhook",
+      "properties": {
+        "offset": {
+          "x": 10,
+          "y": 550
+        },
+        "method": "GET",
+        "url": "http://4ef3dbaa.ngrok.io/news",
+        "body": null,
+        "timeout": null,
+        "parameters": null,
+        "save_response_as": null,
+        "content_type": "application/x-www-form-urlencoded;charset=utf-8"
+      },
+      "transitions": [
+        {
+          "event": "success",
+          "conditions": [],
+          "next": "FF5a8bec06f2497f54fa4dd40c2ae59ec6",
+          "uuid": "b89077ed-5231-4189-97b2-e395a8b32e07"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": "FFdd00558dfe1d8df2cdddb48975711ecf",
+          "uuid": "487be4fc-022d-4952-8e0f-92e870f3a85a"
+        }
+      ],
+      "sid": "FF80f8377fc7bbdc511c1d3e0c3a5ebf07"
+    },
+    {
+      "name": "send_noticia",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": 20,
+          "y": 830
+        },
+        "body": "Sua notícia de hoje\n*Título*: {{widgets.get_noticias.parsed.title}} \n\n*Descrição*: {{widgets.get_noticias.parsed.description}} \n\n*Link*: {{widgets.get_noticias.parsed.link}}\n\nAs noticias são retiradas através da API NewsAPI ( https://newsapi.org/ )",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": "FF732dec2ccd9e29bc86e89a7c5b0c47cd",
+          "uuid": "1325e261-4a7a-4d85-9b47-178c90dcff25"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "5c81ed89-6683-44ee-83c2-2d1df7fc5049"
+        }
+      ],
+      "sid": "FF5a8bec06f2497f54fa4dd40c2ae59ec6"
+    },
+    {
+      "name": "resp_1",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": -310,
+          "y": 550
+        },
+        "body": "- *O que é ?*\n O vírus Sars-Cov-2, causador da doença Covid-19, pertence a família dos vírus Corona (popularmente chamado de Coronavírus). Esses vírus são responsáveis por infecções respiratórias.\n\n- *Como ocorre o contágio?*\n De acordo com o Ministério da Saúde o contagio pode se dar através de “gotículas de saliva; espirro; tosse; catarro; contato pessoal próximo, como toque ou aperto de mão; contato com objetos ou superfícies contaminadas, seguido de contato com a boca, nariz ou olhos.” O tempo de incubação do vírus (período que leva para aparição dos primeiros sintomas) se dá em média de 2 a 14 dias. \n\n- *Como prevenir?*\n Respeite as normas de quarentena que tenham sido impostas pelo poder público. E no aspecto individual, lavar as mãos frequentemente com água e sabonete por pelo menos 20 segundos; limpar as mãos com álcool em gel (70º ou superior); Evitar contato direto com pessoas que apresentem sinais de infecção respiratória; Cobrir o nariz e a boca, antes de tossir ou espirrar, com lenço descartável ou com o antebraço; Limpar e desinfetar objetos e superfícies tocados com frequência; Não compartilhar utensílios pessoais como copos e talheres.",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": "FFfb5682e709e85c864f2eaf437a6b1ff6",
+          "uuid": "6c08d12b-224b-47d6-937c-5dbc62e8fb7a"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": "FFdd00558dfe1d8df2cdddb48975711ecf",
+          "uuid": "4008c728-c4c9-42f4-9397-e7c2ad8fab2a"
+        }
+      ],
+      "sid": "FFc914e0986566f7766ace8c0797254b48"
+    },
+    {
+      "name": "get_fakenews",
+      "type": "Webhook",
+      "properties": {
+        "offset": {
+          "x": 330,
+          "y": 550
+        },
+        "method": "GET",
+        "url": "http://4ef3dbaa.ngrok.io/fakenews",
+        "body": null,
+        "timeout": null,
+        "parameters": null,
+        "save_response_as": null,
+        "content_type": "application/x-www-form-urlencoded;charset=utf-8"
+      },
+      "transitions": [
+        {
+          "event": "success",
+          "conditions": [],
+          "next": "FF792bfa48185ea1c140d917f50b162976",
+          "uuid": "b99d4d4f-adf6-41ff-bfe0-3f0e90a90aca"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": "FFdd00558dfe1d8df2cdddb48975711ecf",
+          "uuid": "08e564a1-2645-4977-bb1a-3696454c2162"
+        }
+      ],
+      "sid": "FFc5c87729a677e059ce2cf3c04da02e01"
+    },
+    {
+      "name": "send_message_2",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": 670,
+          "y": 830
+        },
+        "body": "Veja algumas das Fake News espalhadas:\n\n1. {{widgets.get_fakenews.parsed.item_1}} \n2. {{widgets.get_fakenews.parsed.item_2}} \n3. {{widgets.get_fakenews.parsed.item_3}}\n4. {{widgets.get_fakenews.parsed.item_4}}\n5. {{widgets.get_fakenews.parsed.item_5}}\n6. {{widgets.get_fakenews.parsed.item_6}}\n7. {{widgets.get_fakenews.parsed.item_7}}\n\nPara mais informações verifique o site:  https://www.saude.gov.br/fakenews",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": "FF732dec2ccd9e29bc86e89a7c5b0c47cd",
+          "uuid": "2344df40-c493-4626-8569-5b5ef2b4121a"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "7da3d9dc-b1a2-4e64-b5ab-2b18cb8004d1"
+        }
+      ],
+      "sid": "FF792bfa48185ea1c140d917f50b162976"
+    },
+    {
+      "name": "send_and_reply_1",
+      "type": "MessagePrompt",
+      "properties": {
+        "offset": {
+          "x": 10,
+          "y": 1060
+        },
+        "body": "Gostaria de receber as noticias diariamente?\nResponda 1 se sim!\nResponda 2 caso queira voltar ao menu anterior.\nResponda qualquer coisa ou ignore para cancelar o cadastro.",
+        "from": "{{flow.channel.address}}",
+        "timeout": 60,
+        "save_response_as": null,
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "incomingMessage",
+          "conditions": [],
+          "next": "FFca9afc7a28d684abe3cbc313b29867d0",
+          "uuid": "abd8ae59-6412-4eb1-a944-50673fa92545"
+        },
+        {
+          "event": "timeout",
+          "conditions": [],
+          "next": "FFefb50f7c1047d08b60ba1b026a746d92",
+          "uuid": "40c1d20c-9572-4017-87bc-784804b9f12b"
+        },
+        {
+          "event": "deliveryFailure",
+          "conditions": [],
+          "next": null,
+          "uuid": "64a2395f-7fb8-428e-acbc-a20c2ddb5a02"
+        }
+      ],
+      "sid": "FF732dec2ccd9e29bc86e89a7c5b0c47cd"
+    },
+    {
+      "name": "resp_daily_news",
+      "type": "Branch",
+      "properties": {
+        "offset": {
+          "x": -380,
+          "y": 1300
+        },
+        "input": "{{widgets.send_and_reply_1.inbound.Body}}"
+      },
+      "transitions": [
+        {
+          "event": "noMatch",
+          "conditions": [],
+          "next": "FF2d8956def97c4004350c1549fa5f1760",
+          "uuid": "d18ee84a-ff35-4f4e-9ac6-8888ca55c6f9"
+        },
+        {
+          "event": "match",
+          "conditions": [
+            {
+              "friendly_name": "If value equal_to 1",
+              "type": "equal_to",
+              "arguments": [
+                "{{widgets.send_and_reply_1.inbound.Body}}"
+              ],
+              "value": "1"
+            }
+          ],
+          "next": "FFeb592846d79d2f2af7b6f8c0e80128e9",
+          "uuid": "2b1ac106-8485-49ec-a102-1916dff5ce9f"
+        },
+        {
+          "event": "match",
+          "conditions": [
+            {
+              "friendly_name": "If value matches_any_of 2",
+              "type": "matches_any_of",
+              "arguments": [
+                "{{widgets.send_and_reply_1.inbound.Body}}"
+              ],
+              "value": "2"
+            }
+          ],
+          "next": "FFc3f62a1c9af61407ff9915b52f7ed310",
+          "uuid": "6307d9b1-e659-42f1-aa36-9b951f1fcb3d"
+        }
+      ],
+      "sid": "FFca9afc7a28d684abe3cbc313b29867d0"
+    },
+    {
+      "name": "get_username",
+      "type": "MessagePrompt",
+      "properties": {
+        "offset": {
+          "x": -550,
+          "y": 1550
+        },
+        "body": "Certo. Precisaremos de alguns dados para cadastrá-lo.\nPrimeiro, nos envie seu NOME COMPLETO",
+        "from": "{{flow.channel.address}}",
+        "timeout": 180,
+        "save_response_as": null,
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "incomingMessage",
+          "conditions": [],
+          "next": "FFb18fd28bb1cca62922a43481cb088eee",
+          "uuid": "9817d128-8e00-43b6-9cba-80b772da45b9"
+        },
+        {
+          "event": "timeout",
+          "conditions": [],
+          "next": "FFefb50f7c1047d08b60ba1b026a746d92",
+          "uuid": "69dbea5b-646a-45cb-a48c-b49c3ea9e2ca"
+        },
+        {
+          "event": "deliveryFailure",
+          "conditions": [],
+          "next": null,
+          "uuid": "00074bef-faa2-4d77-aae6-e1cbc724b12c"
+        }
+      ],
+      "sid": "FFeb592846d79d2f2af7b6f8c0e80128e9"
+    },
+    {
+      "name": "set_username",
+      "type": "SetVariables",
+      "properties": {
+        "offset": {
+          "x": -550,
+          "y": 1750
+        },
+        "variables": [
+          {
+            "key": "username",
+            "value": "{{widgets.get_username.inbound.Body}}",
+            "index": "0"
+          }
+        ]
+      },
+      "transitions": [
+        {
+          "event": "next",
+          "conditions": [],
+          "next": "FFd2cb0de0b03c01f0152f721b5847b291",
+          "uuid": "6822e3dc-3bcf-4a87-b833-4c715e204a57"
+        }
+      ],
+      "sid": "FFb18fd28bb1cca62922a43481cb088eee"
+    },
+    {
+      "name": "noreply_dailynews",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": 230,
+          "y": 2090
+        },
+        "body": "Devido a demora da resposta iremos cancelar o seu registro",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": null,
+          "uuid": "5a5d3395-6d3e-4a9f-be30-4111766c90f0"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "34cae235-36bd-47f6-a1bd-de10a178e3ba"
+        }
+      ],
+      "sid": "FFefb50f7c1047d08b60ba1b026a746d92"
+    },
+    {
+      "name": "cancela_dailynews",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": -730,
+          "y": 1300
+        },
+        "body": "Ok, iremos cancelar o registro de News Letter",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": null,
+          "uuid": "42a7e3b9-c170-4cb6-9f3a-0d2d3806d80e"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "c543a6e8-8132-401a-9c14-e15179fa6c52"
+        }
+      ],
+      "sid": "FF2d8956def97c4004350c1549fa5f1760"
+    },
+    {
+      "name": "get_city",
+      "type": "MessagePrompt",
+      "properties": {
+        "offset": {
+          "x": -540,
+          "y": 1980
+        },
+        "body": "Agora nos envie a sua cidade",
+        "from": "{{flow.channel.address}}",
+        "timeout": 180,
+        "save_response_as": null,
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "incomingMessage",
+          "conditions": [],
+          "next": "FF6ecc46142388ef1bfb3a75c01d48b73d",
+          "uuid": "c5508ab7-c35c-40f5-8867-40fb929364ea"
+        },
+        {
+          "event": "timeout",
+          "conditions": [],
+          "next": "FFefb50f7c1047d08b60ba1b026a746d92",
+          "uuid": "b3bf223f-9463-4b9e-83d7-bc6862f4ef46"
+        },
+        {
+          "event": "deliveryFailure",
+          "conditions": [],
+          "next": null,
+          "uuid": "4a9f1906-2e09-4098-8635-292cda26313f"
+        }
+      ],
+      "sid": "FFd2cb0de0b03c01f0152f721b5847b291"
+    },
+    {
+      "name": "set_city",
+      "type": "SetVariables",
+      "properties": {
+        "offset": {
+          "x": -540,
+          "y": 2220
+        },
+        "variables": [
+          {
+            "key": "city",
+            "value": "{{widgets.get_city.inbound.Body}}"
+          }
+        ]
+      },
+      "transitions": [
+        {
+          "event": "next",
+          "conditions": [],
+          "next": "FF3a7e9c1751523efc63449b822aa11e13",
+          "uuid": "325988bc-ba10-4d60-95da-317ceb3bfdb8"
+        }
+      ],
+      "sid": "FF6ecc46142388ef1bfb3a75c01d48b73d"
+    },
+    {
+      "name": "get_uf",
+      "type": "MessagePrompt",
+      "properties": {
+        "offset": {
+          "x": -530,
+          "y": 2450
+        },
+        "body": "Certo, agora nos envie o estado de forma abreviada.\nExemplo: SP, RJ, MG, etc.",
+        "from": "{{flow.channel.address}}",
+        "timeout": 3600,
+        "save_response_as": null,
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "incomingMessage",
+          "conditions": [],
+          "next": "FF189575930939fb524585d16fbbfc78c3",
+          "uuid": "7f49ca00-5bf7-4adf-b354-e77985fe9a2d"
+        },
+        {
+          "event": "timeout",
+          "conditions": [],
+          "next": "FFefb50f7c1047d08b60ba1b026a746d92",
+          "uuid": "872e468c-5b47-491f-94ee-3b55c045fd1b"
+        },
+        {
+          "event": "deliveryFailure",
+          "conditions": [],
+          "next": null,
+          "uuid": "71ef58ac-dcb2-40a0-87e9-4783db70a552"
+        }
+      ],
+      "sid": "FF3a7e9c1751523efc63449b822aa11e13"
+    },
+    {
+      "name": "set_uf",
+      "type": "SetVariables",
+      "properties": {
+        "offset": {
+          "x": -530,
+          "y": 2680
+        },
+        "variables": [
+          {
+            "key": "uf",
+            "value": "{{widgets.get_uf.inbound.Body}}"
+          }
+        ]
+      },
+      "transitions": [
+        {
+          "event": "next",
+          "conditions": [],
+          "next": "FF36a155826ecf89348903a1b09797e174",
+          "uuid": "d503efce-2d3d-42e3-aae7-c83a81d812f0"
+        }
+      ],
+      "sid": "FF189575930939fb524585d16fbbfc78c3"
+    },
+    {
+      "name": "http_register",
+      "type": "Webhook",
+      "properties": {
+        "offset": {
+          "x": -520,
+          "y": 2900
+        },
+        "method": "POST",
+        "url": "http://4ef3dbaa.ngrok.io/users",
+        "body": "{\"name\": \"{{ flow.variables.username }}\",\n\"city\": \"{{ flow.variables.city }}\",\n\"uf\": \"{{ flow.variables.uf }}\",\n\"phone\": \"{{widgets.msg_inicial.inbound.From}}\",\n\"setActive\": true}",
+        "timeout": null,
+        "parameters": null,
+        "save_response_as": null,
+        "content_type": "application/json;charset=utf-8"
+      },
+      "transitions": [
+        {
+          "event": "success",
+          "conditions": [],
+          "next": "FF6dad7958179f4285e40b0089ed4c0f3b",
+          "uuid": "b3ca010c-a241-40c7-a8d4-c1d7b124a9f4"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": "FFce99349e7484e59839b6b2675dec7bfe",
+          "uuid": "e63bd7e0-7f28-4787-b295-322207f4a81b"
+        }
+      ],
+      "sid": "FF36a155826ecf89348903a1b09797e174"
+    },
+    {
+      "name": "set_url",
+      "type": "SetVariables",
+      "properties": {
+        "offset": {
+          "x": -590,
+          "y": 150
+        },
+        "variables": [
+          {
+            "key": "url",
+            "value": "http://5ec0d577.ngrok.io"
+          }
+        ]
+      },
+      "transitions": [
+        {
+          "event": "next",
+          "conditions": [],
+          "next": "FF7830105c911263d26c984a32c9f6fe6a",
+          "uuid": "02b60fd3-6863-4d93-b3b8-dc399bad52ff"
+        }
+      ],
+      "sid": "FF633372ebb19a1dcc6f029dc5ba495007"
+    },
+    {
+      "name": "response_register",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": -280,
+          "y": 3120
+        },
+        "body": "Seu cadastro foi criado:\nNome: {{widgets.http_register.parsed.name}} \nCidade: {{widgets.http_register.parsed.city}} \nUF: {{widgets.http_register.parsed.uf}} \nTelefone: {{widgets.http_register.parsed.phone}}",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": null,
+          "uuid": "0458b7fb-9e2c-45dd-9244-f881158d5a55"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "5f544320-fca3-455b-b4e3-26988bf0e9b8"
+        }
+      ],
+      "sid": "FF6dad7958179f4285e40b0089ed4c0f3b"
+    },
+    {
+      "name": "fail_register",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": 50,
+          "y": 3120
+        },
+        "body": "Erro no cadastro!",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": null,
+          "uuid": "75dda0f6-350f-4f5b-9e7d-cccec4b4fcd9"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "c15f2019-113a-47f6-a1b4-f0030e68c035"
+        }
+      ],
+      "sid": "FFce99349e7484e59839b6b2675dec7bfe"
+    },
+    {
+      "name": "send_message_3",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": 110,
+          "y": 2790
+        },
+        "body": "{name: {{flow.variables.username}} ,\ncity: {{flow.variables.city}} ,\nuf: {{flow.variables.uf}} ,\nphone: {{widgets.msg_inicial.inbound.From}}}",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": "FF36a155826ecf89348903a1b09797e174",
+          "uuid": "b3bb9e7e-8e43-43c3-af46-b0cfe16b99cd"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "dfc99376-2ab4-4a40-a705-e02d8063c92e"
+        }
+      ],
+      "sid": "FFdaf8f96368007d2934ec97a35a26f2b1"
+    },
+    {
+      "name": "resp_1_2",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": -310,
+          "y": 830
+        },
+        "body": "- *Como surgiu?*\nAinda não se sabe a origem definitiva do vírus. Porém sabe-se que possui origem evolutiva e não foi criado/manipulado em laboratório, devido a sua estrutura central distinta de outros vírus e seus receptores de alta ligação com células humanas. Existem 2 animais suspeitos de terem sido os vetores iniciais do vírus, morcegos e pangolins, ambos estão presentes na região de Cantão na China (origem da pandemia) e carregam versões similares do vírus Sars-Cov-2. Assim, através do processo de seleção natural, onde a espécie passa por uma série de mutações espontâneas, conforme se prolifera e assim sobrevive as versões que melhor se adaptam ao seu ambiente. No caso do novo Coronavírus, acredita-se que houve um “salto” entre espécies, prevalecendo aquela que melhor passou a infectar seus hospedeiros e chegando aos humanos. \n \n*Fontes:*\nhttps://coronavirus.saude.gov.br/\nhttps://www.saude.gov.br/o-ministro/746-saude-de-a-a-z/46490-novo-coronavirus-o-que-e-causas-sintomas-tratamento-e-prevencao-3\nhttps://www.hospitalsiriolibanes.org.br/coronavirus/Documents/infografico-covid.pdf\nhttps://noticias.uol.com.br/saude/ultimas-noticias/afp/2020/03/13/origem-do-coronavirus-pequim-se-recusa-a-assumir-responsabilidade.htm\nhttps://www.bbc.com/portuguese/internacional-51641776",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": "FF732dec2ccd9e29bc86e89a7c5b0c47cd",
+          "uuid": "0c5e81de-cb58-4bc0-9e70-0f7a4baa802f"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "6dd86084-5ff4-4129-8d6b-43e462330633"
+        }
+      ],
+      "sid": "FFfb5682e709e85c864f2eaf437a6b1ff6"
+    },
+    {
+      "name": "http_active_false",
+      "type": "Webhook",
+      "properties": {
+        "offset": {
+          "x": -960,
+          "y": 550
+        },
+        "method": "POST",
+        "url": "http://4ef3dbaa.ngrok.io/users",
+        "body": "{\"setActive\": false,\n\"phone\": \"{{widgets.msg_inicial.inbound.From}}\"}",
+        "timeout": null,
+        "parameters": null,
+        "save_response_as": null,
+        "content_type": "application/json;charset=utf-8"
+      },
+      "transitions": [
+        {
+          "event": "success",
+          "conditions": [],
+          "next": "FF55bfc1486d0baf58fb3b84ec99f5b9c5",
+          "uuid": "4cf77e0f-8343-4267-a5b3-3ecfa42c6599"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": "FFdd00558dfe1d8df2cdddb48975711ecf",
+          "uuid": "5d9b72cb-b851-4aa4-a7c0-a17dbe7b5929"
+        }
+      ],
+      "sid": "FFa702ce8b1bbc0b991fda02f586fd3fd8"
+    },
+    {
+      "name": "send_unregistered",
+      "type": "Message",
+      "properties": {
+        "offset": {
+          "x": -950,
+          "y": 830
+        },
+        "body": "Ok, iremos interromper o serviço de envio de notícias.\nCaso queira receber notícias novamente, basta realizar o cadastro.",
+        "from": "{{flow.channel.address}}",
+        "to": "{{contact.channel.address}}",
+        "media_url": null,
+        "service": "{{trigger.message.InstanceSid}}",
+        "channel": "{{trigger.message.ChannelSid}}",
+        "attributes": null
+      },
+      "transitions": [
+        {
+          "event": "sent",
+          "conditions": [],
+          "next": null,
+          "uuid": "3e542cb2-0f0d-42d8-a781-288d6f99842c"
+        },
+        {
+          "event": "failed",
+          "conditions": [],
+          "next": null,
+          "uuid": "7f6306a3-d7ff-441d-8476-4e0c0a4d754c"
+        }
+      ],
+      "sid": "FF55bfc1486d0baf58fb3b84ec99f5b9c5"
+    }
+  ]
+}

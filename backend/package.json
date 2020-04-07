@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "knex": "^0.20.13",
+    "node-cron": "^2.0.3",
+    "sqlite3": "^4.1.1",
+    "twilio": "^3.42.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
